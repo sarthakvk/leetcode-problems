@@ -12,8 +12,8 @@ class Solution:
         
         ans = []
 
-        for i in arr[::-1]:
-            for j in i:
+        for i in range(len(arr)-1,-1,-1):
+            for j in arr[i]:
                 ans.append(j)
                 if len(ans) == k:
                     return ans
