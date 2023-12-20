@@ -1,16 +1,12 @@
 class Solution:
     def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
         m = {}
-
-        for i in range(len(nums)):
-            l = m.setdefault(nums[i], [])
-            l.append(i)
         
-        for i in m.values():
-            i.sort()
-            for j in range(1, len(i)):
-                if i[j] - i[j-1] <= k:
-                    return True
+        for i, n in enumerate(nums):
+            if n in m and (i-m[n]) <= k:
+                return True
+            else:
+                m[n] = i
         
         return False
         
