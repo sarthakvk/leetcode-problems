@@ -2,16 +2,14 @@ class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
         wl = s.split(" ")
         wm = {}
-        mw = {}
-
         if len(pattern) != len(wl):
             return False
-
+        if len(set(pattern)) != len(set(wl)):
+            return False
         for w, pat in zip(wl, pattern):
-            if pat not in wm and w not in mw:
+            if pat not in wm:
                 wm[pat] = w
-                mw[w] = pat
-            elif wm.get(pat, '') != w or mw.get(w, '') != pat:
+            elif wm[pat] != w:
                 return False
         
         return True
