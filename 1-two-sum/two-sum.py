@@ -5,7 +5,7 @@ class Solution:
         for i in range(len(nums)):
             l = d.setdefault(nums[i], [])
             l.append(i)
-        print(d)
+
         for i in range(len(nums)):
             rem = target - nums[i]
 
