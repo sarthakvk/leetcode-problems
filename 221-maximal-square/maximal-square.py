@@ -7,29 +7,20 @@ class Solution:
             if i >= m or j >= n:
                 return 0
             
-            if dp.get((i,j)):
-                return dp[(i,j)]
-            
-            if matrix[i][j] == "0":
-                return 0
+            if dp.get((i,j)) is None:
 
-            if i == m-1 or j == n-1:
+                ans = (1 + min(isSq(i, j+1), isSq(i+1, j), isSq(i+1, j+1)))
+
                 if matrix[i][j] == "1":
-                    ans = 1
+                    dp[(i,j)] = ans
                 else:
-                    ans = 0
-                dp[(i,j)] = ans
-                return ans
+                    dp[(i,j)] = 0
 
-            ans = (1 + min(isSq(i, j+1), isSq(i+1, j), isSq(i+1, j+1))**0.5)**2
-            ans = int(ans)
-            dp[(i,j)] = ans
-            return ans
+            return dp[(i,j)]
         
         ans = 0
-        for i in range(m):
-            for j in range(n):
-                if matrix[i][j] == "1":
-                    ans = max(isSq(i,j), ans)
-        
-        return ans
+        isSq(0,0)
+        for i in dp.values():
+            ans = max(ans, i)
+
+        return ans*ans
