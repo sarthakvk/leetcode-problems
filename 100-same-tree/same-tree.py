@@ -32,9 +32,6 @@ class Solution:
         preorder(p, p1)
         preorder(q, p2)
 
-        print(p1, p2)
-        print(i1, i2)
-
         if len(p1) != len(p2):
             return False
         
