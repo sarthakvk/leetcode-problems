@@ -19,11 +19,13 @@ class Solution:
                 if A[val] < A[ptr.val]:
                     if ptr.left is None:
                         ptr.left = TreeNode(val=val)
+                        ptr = ptr.left
                         break
                     ptr = ptr.left
                 else:
                     if ptr.right is None:
                         ptr.right = TreeNode(val=val)
+                        ptr = ptr.right
                         break
                     ptr = ptr.right
                 
