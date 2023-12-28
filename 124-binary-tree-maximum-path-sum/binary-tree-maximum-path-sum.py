@@ -14,8 +14,8 @@ class Solution:
             s2, i2 = msum(root.right)
 
             ans = (
-               max(s1, s2, 0) + root.val,
-               max(i1, i2, s1+root.val, s2+root.val, s1+s2+root.val, root.val)
+               max(max(s1, s2, 0) + root.val, root.val),
+               max(i1, i2, s1+s2+root.val, s1, s2)
             )
             
             return ans
