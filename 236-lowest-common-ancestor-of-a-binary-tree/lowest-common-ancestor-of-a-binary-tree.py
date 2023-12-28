@@ -27,6 +27,7 @@ class Solution:
             
             if c == 0:
                 break
+        
         hp = parent[p][1]
         hq = parent[q][1]
         if hp > hq:
