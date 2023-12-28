@@ -6,32 +6,30 @@
 #         self.right = right
 class Solution:
     def countNodes(self, root: Optional[TreeNode]) -> int:
-        if not root:
-            return 0
-
-        height = 0
-        cur = root
-
-        while cur.left:
-            cur = cur.left
-            height += 1
-        
-        ans = 2**height -1
-        terminate = False
-
-        def cl(root, h=1):
-            nonlocal height, ans, terminate
+        def cn(root, lh=None, rh=None):
             if not root:
-                terminate = True
-
-            if root and h > height:
-                ans += 1
-                return
+                return 0
             
-            if not terminate:
-                cl(root.left, h=h+1)
-                cl(root.right, h=h+1)
+            if lh is None:
+                lh = 0
+                cur = root
+                while cur:
+                    lh += 1
+                    cur = cur.left
+            if rh is None:
+                rh = 0
+                cur = root
+                while cur:
+                    rh += 1
+                    cur = cur.right
+            
+            if rh == lh:
+                ans = 2**lh - 1
+            else:
+                ans = 1 + cn(root.left, lh=lh-1) + cn(root.right, rh=rh-1)
+
+            return ans
         
-        cl(root)
-        return ans
+        return cn(root)
+
         
