@@ -22,14 +22,13 @@ class Solution:
                 nmap["block"] = True
             
 
-        visited = {}
         blocked = {}
         for i in range(len(board)):
             for j in range(len(board[i])):
                 if board[i][j] == 'X':
                     continue
                 
-                if not visited.get((i, j)) and not blocked.get((i,j)):
+                if not blocked.get((i,j)):
                     region = {}
                     bfs(i, j, region)
                     block = region.pop('block', False)
@@ -40,7 +39,6 @@ class Solution:
                                 break
                             blocked[(x, y)] = True
                         else:
-                            visited[(x, y)] = True
                             board[x][y] = 'X'
                 
             
