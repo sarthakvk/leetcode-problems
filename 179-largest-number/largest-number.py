@@ -25,7 +25,7 @@ class Solution:
             
         for i in range(len(nums), -1, -1):
             for j in range(1, i):
-                if order(nums[j-1], nums[j]) < 0:
+                if nums[j-1] + nums[j] < nums[j] + nums[j-1]:
                     nums[j-1], nums[j] = nums[j], nums[j-1]
         return str(int(''.join(nums)))
         
