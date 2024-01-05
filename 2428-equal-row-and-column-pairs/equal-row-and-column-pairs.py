@@ -1,29 +1,20 @@
 class Solution:
     def equalPairs(self, grid: List[List[int]]) -> int:
         n = len(grid)
-
-        rc = {}
-        cc = {}
+        r = Counter()
+        c = Counter()
         ans = 0
         for i in range(n):
-            l = rc.setdefault(grid[i][0], [])
-            l.append(i)    
-            l = cc.setdefault(grid[0][i], [])
-            l.append(i)
-
-        for start, idxes in rc.items():
-            cols = cc.get(start, [])
-            for r in idxes:
-                for c in cols:
-                    found = True
-                    for i in range(n):
-                        if grid[i][c] != grid[r][i]:
-                            found = False
-                            break
-                    if cols and found:
-                        ans += 1
+            r_val = ''
+            c_val = ''
+            for j in range(n):
+                r_val += str(grid[i][j]) + "-"
+                c_val += str(grid[j][i]) + "-"
+            
+            r[r_val] += 1
+            c[c_val] += 1
+        for k, v in r.items():
+            if k in c:
+                ans += (v*c[k])
         
         return ans
-
-        
-        
