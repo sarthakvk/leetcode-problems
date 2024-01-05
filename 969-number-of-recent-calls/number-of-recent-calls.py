@@ -1,29 +1,19 @@
+from collections import deque
+
 class RecentCounter:
 
     def __init__(self):
-        self.arr = []
+        self.arr = deque()
     
-    def lb(self, val):
-        val -= 3000
-        s = 0
-        e = len(self.arr) - 1
+    def rm(self, val):
+        while self.arr[0] < val-3000:
+            self.arr.popleft()
 
-        while s <= e:
-            m = (s+e)//2
-
-            if self.arr[m] < val:
-                s = m + 1
-            elif self.arr[m] > val:
-                e = m - 1
-            else:
-                return m
-
-        return e + 1
-        
 
     def ping(self, t: int) -> int:
         self.arr.append(t)
-        return len(self.arr) - self.lb(t)
+        self.rm(t)
+        return len(self.arr)
         
 
 
