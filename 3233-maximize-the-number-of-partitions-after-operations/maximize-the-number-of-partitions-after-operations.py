@@ -3,7 +3,7 @@ class Solution:
         @cache
         def dp(idx, current_set, can_change):
             if idx >= len(s):
-                return 0
+                return 1
             
             character_idx = ord(s[idx]) - ord('a')
 
@@ -26,4 +26,4 @@ class Solution:
                         res = max(res, dp(idx+1, new_set, False))
             
             return res
-        return dp(0, 0, True)+1
+        return dp(0, 0, True)
