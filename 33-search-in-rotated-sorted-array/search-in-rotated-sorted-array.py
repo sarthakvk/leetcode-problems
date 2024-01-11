@@ -16,7 +16,6 @@ class Solution:
             return end
         
         pivot = find_pivot()
-        print(pivot)
 
         if target <= nums[-1]:
             start = pivot
