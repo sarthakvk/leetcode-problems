@@ -1,16 +1,9 @@
 class Solution:
     def minimumReplacement(self, nums: List[int]) -> int:
-        def split_till_sm(n1, n2):
-            op = (n1-1)//n2
-            return n1//(op+1), op
-
+        n = len(nums)
         ans = 0
-        for i in range(len(nums)-2, -1, -1):
-            if nums[i] > nums[i+1]:
-                n, op = split_till_sm(nums[i], nums[i+1])
-                # print(f"Split {nums[i]} to {n} by {op}")
-                nums[i] = n
-                ans += op
-        
+        for i in range(n-2, -1, -1):
+            op = (nums[i]-1)//(nums[i+1])
+            ans += op
+            nums[i] = nums[i]//(op+1)
         return ans
-        
