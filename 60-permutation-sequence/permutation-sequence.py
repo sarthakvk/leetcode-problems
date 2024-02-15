@@ -1,24 +1,18 @@
 class Solution:
     def getPermutation(self, n: int, k: int) -> str:
-        ans = [None]*n
-        cnt = 0
-        def per(n, p=1):
-            nonlocal cnt, k
-            found = False
-            if p > n:
-                cnt += 1
-                return cnt == k
-            for i in range(1, n+1):
-                if i in ans:
-                    continue
-                ans[p-1] = i
-                found = per(n, p+1)
+        nums = list(range(1, n+1))
 
-                if found:
-                    break
-                ans[p-1] = None
-
-            return found
+        fact = [0]*n
+        num = k - 1
+        i = 1
+        while num > 0:
+            fact[n-i] = num%i
+            num //= i
+            i += 1
         
-        per(n)
-        return ''.join(map(str, ans))
+        for i in range(n):
+            val = fact[i]
+            fact[i] = nums[val]
+            nums.pop(val)
+        
+        return ''.join(map(str, fact))
