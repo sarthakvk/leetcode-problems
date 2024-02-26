@@ -15,29 +15,14 @@ class Solution:
         ans = []
         g1, g2 = pre(root1), pre(root2)
         
-        try:
-            v1 = next(g1)
-        except:
-            v1 = None
-        
-        try:
-            v2 = next(g2)
-        except:
-            v2 = None
-
+        v1, v2 = next(g1, None), next(g2, None)
 
         while v1 is not None or v2 is not None:
             if v2 is None or (v1 is not None and v1 <= v2):
                 ans.append(v1)
-                try:
-                    v1 = next(g1)
-                except:
-                    v1 = None
+                v1 = next(g1, None)
             elif v1 is None or (v2 is not None and v2 <= v1):
                 ans.append(v2)
-                try:
-                    v2 = next(g2)
-                except:
-                    v2 = None
+                v2 = next(g2, None)
         
         return ans
